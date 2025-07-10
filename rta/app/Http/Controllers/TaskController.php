@@ -21,25 +21,25 @@ class TaskController extends Controller
 
 
         if ($request->ajax()) {
-        $query = Task::query();
+            $query = Task::query();
 
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
+            if ($request->filled('status')) {
+                $query->where('status', $request->status);
+            }
 
-        if ($request->filled('due_date')) {
-            $query->whereDate('due_date', $request->due_date);
-        }
+            if ($request->filled('due_date')) {
+                $query->whereDate('due_date', $request->due_date);
+            }
 
-        return DataTables::of($query)
-            ->addIndexColumn()
-            ->addColumn('actions', function ($row) {
-                return view('tasks.partials.actions', compact('row'))->render();
-            })
-            ->editColumn('status', fn($row) => ucfirst(str_replace('_', ' ', $row->status)))
-            ->editColumn('due_date', fn($row) => $row->due_date ?? 'N/A')
-            ->rawColumns(['actions'])
-            ->make(true);
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($row) {
+                    return view('tasks.partials.actions', compact('row'))->render();
+                })
+                ->editColumn('status', fn($row) => ucfirst(str_replace('_', ' ', $row->status)))
+                ->editColumn('due_date', fn($row) => $row->due_date ?? 'N/A')
+                ->rawColumns(['actions'])
+                ->make(true);
         }
     }
 
@@ -64,9 +64,10 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task created.');
     }
 
-    public function edit(Task $task)
+    public function edit($id)
     {
-        return view('tasks.edit', compact('task'));
+        $task = Task::findOrFail($id);
+        return view('tasks.partials.edit-form', compact('task'));
     }
 
     public function update(Request $request, Task $task)
