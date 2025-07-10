@@ -1,4 +1,4 @@
-# Task Manager - Laravel CRUD Project
+# RTI Task Manager - Laravel CRUD Project
 
 A simple Laravel project to manage tasks with create, read, update, and delete (CRUD) functionality. It uses modals for adding and editing tasks and DataTables for smooth pagination, sorting, and filtering.
 
@@ -19,5 +19,7 @@ A simple Laravel project to manage tasks with create, read, update, and delete (
 1. **Clone the repo** (or extract the project folder)
 
    ```bash
-   git clone <your-repo-url>
-   cd your-project-folder
+   git clone https://github.com/Arjyouu97/RTI-Task-Laravel/
+   cd rti
+
+   

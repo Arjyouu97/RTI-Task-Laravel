@@ -30,8 +30,10 @@ class TaskController extends Controller
             if ($request->filled('due_date')) {
                 $query->whereDate('due_date', $request->due_date);
             }
+            // dd($query);
 
             return DataTables::of($query)
+
                 ->addIndexColumn()
                 ->addColumn('actions', function ($row) {
                     return view('tasks.partials.actions', compact('row'))->render();
